@@ -47,7 +47,7 @@ const messages = ["やりましたね! 大吉です","吉です。結構いい�
 const messageNo = Math.floor( Math.random() * messages.length);
 
 // ウエイクワードの定義
-var wake_word = "*こんにちは";
+//var wake_word = "*こんにちは";
 
 const startButton = document.querySelector('#startButton'); // 開始ボタン
 const stopButton = document.querySelector('#stopButton'); // 停止ボタン
@@ -77,7 +77,7 @@ let output = ''; // 出力
 
 // 認識結果が出力されたときのイベントハンドラ
 asr.onresult = function(event){
-    let transcript = event.results[event.resultIndex][0].transcript;    let transcript = event.results[event.resultIndex][0].transcript; // 結果文字列
+    let transcript = event.results[event.resultIndex][0].transcript; // 結果文字列
     let transcript_previous = null; // 結果文字列（ひとつ前）
 
     if(event.resultIndex > 0){
@@ -87,7 +87,7 @@ asr.onresult = function(event){
     // 結果文字列
     let output_not_final = '';
     if (event.results[event.resultIndex].isFinal) { // 結果が確定（Final）のとき
-        if(new RegExp(wake_word).test(transcript_previous)){
+        //if(new RegExp(wake_word).test(transcript_previous)){
             asr.abort(); // 音声認識を停止
 
 	        let ret = response[transcript];
@@ -129,7 +129,7 @@ asr.onresult = function(event){
             }
 
             speechSynthesis.speak(tts); // 再生
-        }
+        //}
     } else { // 結果がまだ未確定のとき
         output_not_final = '<span style="color:#ddd;">' + transcript + '</span>';
     }
