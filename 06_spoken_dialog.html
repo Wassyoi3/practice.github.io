@@ -38,11 +38,16 @@ var response = {
     "大阪の天気": ["大阪府の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/27/"],
     "京都の天気": ["京都府の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/26/"],
     "奈良の天気": ["奈良県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/29/"],
-    "兵庫の天気": ["兵庫県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/28/"]
+    "兵庫の天気": ["兵庫県の天気予報を表示します", "https://weather.yahoo.co.jp/weather/jp/28/"],
+    "おみくじ"
 };
 
+const messages = ["やりましたね! 大吉です","吉です。結構いいのでは","中吉です。実は中吉って吉より悪いんですよ", "小吉です。小さな幸せが見つけられるかも", "末吉です。なんとも言えませんね","き、き、凶でした...なんと言えばいいのか..."]
+
+const messageNo = Math.floor( Math.random() * messages.length);
+
 // ウエイクワードの定義
-var wake_word = "OK.*コンピューター";
+var wake_word = "*こんにちは";
 
 const startButton = document.querySelector('#startButton'); // 開始ボタン
 const stopButton = document.querySelector('#stopButton'); // 停止ボタン
@@ -109,7 +114,8 @@ asr.onresult = function(event){
 
             if(typeof answer == 'undefined'){
                 answer = "ごめんなさい。わかりません。";
-            } else {
+            } else if(typeof response == "おみくじ") {
+                answer = messages[messageNo]
                 answer = ret[0];
                 webpage = ret[1];
             }
